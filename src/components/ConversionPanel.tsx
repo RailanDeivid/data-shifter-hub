@@ -50,6 +50,7 @@ export const ConversionPanel = ({
           setIsConverting(false);
           setIsComplete(true);
           return 100;
+        }
         return prev + 10;
       });
     }, 200);

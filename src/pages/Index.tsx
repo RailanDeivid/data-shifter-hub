@@ -103,43 +103,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Features Section */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-bold text-center text-foreground mb-8">
-              Por que usar nosso conversor?
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="p-6 text-center bg-card shadow-card">
-                <div className="p-3 bg-primary/10 rounded-full w-fit mx-auto mb-4">
-                  <Zap className="h-6 w-6 text-primary" />
-                </div>
-                <h4 className="font-semibold text-card-foreground mb-2">Rápido e Eficiente</h4>
-                <p className="text-muted-foreground text-sm">
-                  Conversões otimizadas que preservam a integridade dos seus dados
-                </p>
-              </Card>
-
-              <Card className="p-6 text-center bg-card shadow-card">
-                <div className="p-3 bg-primary/10 rounded-full w-fit mx-auto mb-4">
-                  <FileText className="h-6 w-6 text-primary" />
-                </div>
-                <h4 className="font-semibold text-card-foreground mb-2">Múltiplos Formatos</h4>
-                <p className="text-muted-foreground text-sm">
-                  Suporte completo para Excel (.xlsx, .xls, .xlsb), CSV e Parquet
-                </p>
-              </Card>
-
-              <Card className="p-6 text-center bg-card shadow-card">
-                <div className="p-3 bg-primary/10 rounded-full w-fit mx-auto mb-4">
-                  <ArrowUpDown className="h-6 w-6 text-primary" />
-                </div>
-                <h4 className="font-semibold text-card-foreground mb-2">Fácil de Usar</h4>
-                <p className="text-muted-foreground text-sm">
-                  Interface intuitiva com drag-and-drop para máxima facilidade
-                </p>
-              </Card>
-            </div>
-          </div>
         </div>
       </div>
     </div>

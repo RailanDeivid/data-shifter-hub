@@ -27,6 +27,7 @@ export const ConversionPanel = ({
     switch (ext) {
       case 'xlsx':
       case 'xls':
+      case 'xlsb':
         return 'Excel';
       case 'csv':
         return 'CSV';

@@ -32,6 +32,7 @@ export const FileUpload = ({
     accept: {
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
       'application/vnd.ms-excel': ['.xls'],
+      'application/vnd.ms-excel.sheet.binary.macroEnabled.12': ['.xlsb'],
       'text/csv': ['.csv'],
       'application/octet-stream': ['.parquet']
     },

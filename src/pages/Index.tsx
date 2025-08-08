@@ -23,7 +23,7 @@ const Index = () => {
     console.log(`Converting ${selectedFile?.name} to ${targetFormat}`);
   };
 
-  const acceptedFormats = ["XLSX", "XLS", "CSV", "PARQUET"];
+  const acceptedFormats = ["XLSX", "XLS", "XLSB", "CSV", "PARQUET"];
 
   return (
     <div className="min-h-screen bg-background">
@@ -125,7 +125,7 @@ const Index = () => {
                 </div>
                 <h4 className="font-semibold text-card-foreground mb-2">Múltiplos Formatos</h4>
                 <p className="text-muted-foreground text-sm">
-                  Suporte completo para Excel (.xlsx, .xls), CSV e Parquet
+                  Suporte completo para Excel (.xlsx, .xls, .xlsb), CSV e Parquet
                 </p>
               </Card>
 

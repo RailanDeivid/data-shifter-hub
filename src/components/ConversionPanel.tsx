@@ -21,6 +21,7 @@ export const ConversionPanel = ({
   const [isConverting, setIsConverting] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [convertedFileUrl, setConvertedFileUrl] = useState<string | null>(null);
 
   const getSourceFormat = (filename: string) => {
     const ext = filename.split('.').pop()?.toLowerCase();
@@ -38,9 +39,49 @@ export const ConversionPanel = ({
     }
   };
 
+  const generateConvertedFile = (originalFile: File, targetFormat: string) => {
+    const baseName = originalFile.name.split('.')[0];
+    let content = '';
+    let mimeType = '';
+    let extension = '';
+
+    switch (targetFormat) {
+      case 'csv':
+        content = 'Nome,Idade,Cidade\nJoão,30,São Paulo\nMaria,25,Rio de Janeiro\nPedro,35,Belo Horizonte';
+        mimeType = 'text/csv';
+        extension = 'csv';
+        break;
+      case 'excel':
+        // Simula um arquivo Excel básico
+        content = 'Nome\tIdade\tCidade\nJoão\t30\tSão Paulo\nMaria\t25\tRio de Janeiro\nPedro\t35\tBelo Horizonte';
+        mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        extension = 'xlsx';
+        break;
+      case 'parquet':
+        // Simula dados para Parquet
+        content = 'Dados convertidos para formato Parquet (arquivo simulado)';
+        mimeType = 'application/octet-stream';
+        extension = 'parquet';
+        break;
+      default:
+        content = 'Arquivo convertido';
+        mimeType = 'text/plain';
+        extension = 'txt';
+    }
+
+    const blob = new Blob([content], { type: mimeType });
+    return {
+      blob,
+      filename: `${baseName}_convertido.${extension}`
+    };
+  };
+
   const handleConvert = async () => {
+    if (!selectedFile) return;
+    
     setIsConverting(true);
     setProgress(0);
+    setConvertedFileUrl(null);
     
     // Simulate conversion progress
     const interval = setInterval(() => {
@@ -49,6 +90,12 @@ export const ConversionPanel = ({
           clearInterval(interval);
           setIsConverting(false);
           setIsComplete(true);
+          
+          // Generate converted file when conversion is complete
+          const { blob, filename } = generateConvertedFile(selectedFile, targetFormat);
+          const url = URL.createObjectURL(blob);
+          setConvertedFileUrl(url);
+          
           return 100;
         }
         return prev + 10;
@@ -56,6 +103,18 @@ export const ConversionPanel = ({
     }, 200);
     
     onConvert();
+  };
+
+  const handleDownload = () => {
+    if (!convertedFileUrl || !selectedFile) return;
+    
+    const { filename } = generateConvertedFile(selectedFile, targetFormat);
+    const link = document.createElement('a');
+    link.href = convertedFileUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const formats = [
@@ -145,7 +204,11 @@ export const ConversionPanel = ({
               <CheckCircle2 className="h-5 w-5" />
               <span className="font-medium">Conversão concluída!</span>
             </div>
-            <Button className="w-full bg-gradient-primary hover:shadow-elegant transition-all" size="lg">
+            <Button 
+              onClick={handleDownload}
+              className="w-full bg-gradient-primary hover:shadow-elegant transition-all" 
+              size="lg"
+            >
               <Download className="h-4 w-4 mr-2" />
               Baixar arquivo convertido
             </Button>
